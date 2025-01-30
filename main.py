@@ -24,8 +24,7 @@ embeddings_np = np.array(embeddings)
 dimension = embeddings_np.shape[1]
 index = faiss.IndexFlatL2(dimension)
 index.add(embeddings_np)
-print("Number of documents in the index: {}".format(index.ntotal))
-
+print(f"Number of documents in the index: {index.ntotal}")
 
 # Save the FAISS index
 faiss.write_index(index, "document_index.faiss")
@@ -39,13 +38,15 @@ llm_pipeline = pipeline("text-generation", model=llm_model, tokenizer=tokenizer)
 # Flask app
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
-
+@app.route("/",methods=["GET"])
+def home():
+    return "Hello Bot"
 @app.route("/query", methods=["POST"])
 def search_and_answer():
     try:
         data = request.json
         query = data["query"]
-
+        print("Code work")
         if not query:
             return jsonify({"error": "Query cannot be empty"}), 400
 
@@ -62,8 +63,8 @@ def search_and_answer():
 
         # 3. Pass the documents and query to the LLM
         prompt = (
-            "Documents:\n{}\n\n".format(best_matches)
-            "Question: {}\n\n".format(query)
+            f"Documents:\n{best_matches}\n\n"
+            f"Question: {query}\n\n"
             f"Answer:"
         )
         response = llm_pipeline(prompt, max_length=1500, num_return_sequences=1,temperature=0.9)
