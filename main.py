@@ -24,7 +24,8 @@ embeddings_np = np.array(embeddings)
 dimension = embeddings_np.shape[1]
 index = faiss.IndexFlatL2(dimension)
 index.add(embeddings_np)
-print(f"Number of documents in the index: {index.ntotal}")
+print("Number of documents in the index: {}".format(index.ntotal))
+
 
 # Save the FAISS index
 faiss.write_index(index, "document_index.faiss")
