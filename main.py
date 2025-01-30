@@ -63,7 +63,7 @@ def search_and_answer():
         # 3. Pass the documents and query to the LLM
         prompt = (
             "Documents:\n{}\n\n".format(best_matches)
-            f"Question: {query}\n\n"
+            "Question: {}\n\n".format(query)
             f"Answer:"
         )
         response = llm_pipeline(prompt, max_length=1500, num_return_sequences=1,temperature=0.9)
