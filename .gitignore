@@ -1,0 +1,7 @@
+# Ignore Python virtual environment
+Lib/
+Scripts/
+pyvenv.cfg
+share/
+document_index.faiss"Lib/site-packages/torch/lib/*.dll" 
+"Lib/site-packages/torch/lib/*.lib" 
