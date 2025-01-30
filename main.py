@@ -62,7 +62,7 @@ def search_and_answer():
 
         # 3. Pass the documents and query to the LLM
         prompt = (
-            f"Documents:\n{best_matches}\n\n"
+            "Documents:\n{}\n\n".format(best_matches)
             f"Question: {query}\n\n"
             f"Answer:"
         )
